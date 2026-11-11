@@ -1,0 +1,13 @@
+node_modules
+.nuxt
+.output
+.data
+.env
+dist
+*.log
+.DS_Store
+.playwright-mcp
+shots
+.env.*
+!.env.example
+Fotos

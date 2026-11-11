@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme static {
+  --color-kalk: #f7f2e8;       /* Seitenfläche */
+  --color-blatt: #fffcf6;      /* Flächen */
+  --color-linie: #e6dcc8;
+  --color-tinte: #1f1a14;      /* Text, Druckfarbe */
+  --color-tinte-weich: #5e554a;
+  --color-honig: #f2b632;      /* Kaufen, Auswahl */
+  --color-honig-dunkel: #e8a317;
+  --color-sand: #efe6d3;       /* Chips, Hover */
+  --color-sand-dunkel: #ede4d2; /* Kartenfläche */
+  --color-bernstein: #8a5300;  /* Akzenttext auf hell */
+  --color-bernstein-dunkel: #7a4a00;
+  --color-nacht: #1f1a14;
+  --color-nacht-text: #cfc5b4;
+  --color-fehler: #b3261e;
+
+  /* Etikettenpapier – wie die Bögen auf den Fotos */
+  --color-papier-weiss: #fbfbf7;
+  --color-papier-gelb: #f7d417;
+  --color-papier-orange: #f26b3a;
+  --color-papier-blau: #6cb4e4;
+  --color-papier-gruen: #4fae5a;
+  --color-papier-kraft: #c9a26b;
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html { background: var(--color-kalk); color: var(--color-tinte); -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.55; }
+  h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; letter-spacing: -0.01em; text-wrap: balance; font-weight: 700; }
+  :focus-visible { outline: 3px solid var(--color-tinte); outline-offset: 2px; border-radius: 4px; }
+  ::selection { background: var(--color-honig); }
+  .tabular { font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+}
+
+@layer components {
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    min-height: 2.75rem; padding: .55rem 1.2rem; border-radius: 999px;
+    font-weight: 700; line-height: 1; border: 2px solid transparent; cursor: pointer;
+    transition: background-color .15s, border-color .15s;
+  }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .btn-kaufen { background: var(--color-honig); color: var(--color-tinte); }
+  .btn-kaufen:hover:not(:disabled) { background: var(--color-honig-dunkel); }
+  .btn-tinte { background: var(--color-tinte); color: #fff; }
+  .btn-tinte:hover:not(:disabled) { background: #3a3127; }
+  .btn-rand { background: transparent; color: var(--color-tinte); border-color: var(--color-linie); }
+  .btn-rand:hover:not(:disabled) { border-color: var(--color-tinte-weich); background: var(--color-sand); }
+  .werkzeug { display: inline-flex; align-items: center; justify-content: center; height: 2.25rem; width: 2.25rem; border-radius: 0.5rem; color: var(--color-tinte); }
+  .werkzeug:hover:not(:disabled) { background: var(--color-sand); }
+  .werkzeug:focus-visible { outline: 2px solid var(--color-honig-dunkel); outline-offset: 1px; }
+  .werkzeug:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-klein { min-height: 2.25rem; padding: .35rem .85rem; font-size: .9rem; }
+
+  .feld { display: grid; gap: .3rem; align-content: start; }
+  .feld > span { font-weight: 700; font-size: .95rem; }
+  .feld > small:not(.fehlertext) { color: var(--color-tinte-weich); font-size: .85rem; }
+  .eingabe {
+    width: 100%; min-height: 2.85rem; padding: .55rem .8rem; border-radius: 8px;
+    border: 2px solid var(--color-linie); background: #fff; color: var(--color-tinte);
+  }
+  .eingabe:focus { border-color: var(--color-tinte); outline: none; }
+  .eingabe[aria-invalid="true"] { border-color: var(--color-fehler); }
+  .fehlertext { color: var(--color-fehler); font-size: .88rem; font-weight: 700; }
+
+  .flaeche { background: var(--color-blatt); border-radius: 12px; border: 1px solid var(--color-linie); }
+  .tabelle { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  .tabelle th { text-align: left; font-weight: 700; padding: .5rem .6rem; border-bottom: 2px solid var(--color-linie); }
+  .tabelle td { padding: .5rem .6rem; border-bottom: 1px solid var(--color-linie); vertical-align: top; }
+}
